@@ -11,10 +11,6 @@ namespace FKCPObj.SimleClass
         private List<SimpleTerm> Terminal;
         private bool _IsActive;
 
-
-
-
-
     }
 
 }
