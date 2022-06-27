@@ -1,12 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using FKCPObj.SimpleClass;
 
 namespace FKCPObj.SimleClass
 {
-    internal class SimpleUK
+    public class SimpleUK
     {
+        private string _NetName;
+        private string _RKeepName;
+        private List<SimpleFR> _FRs;
+        private List<SimpleTerm> Terminal;
+        private bool _IsActive;
+
+
+
+
+
     }
+
 }

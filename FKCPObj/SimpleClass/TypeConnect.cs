@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FKCPObj.SimpleClass
 {
-    public enum ConnectType
+    public enum TypeConnect
     {
         RNDIS = 0,
         ETHERNET = 1,

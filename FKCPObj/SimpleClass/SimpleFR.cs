@@ -13,7 +13,7 @@ namespace FKCPObj.SimleClass
         private readonly string? _ProduceName;
         private readonly string? _Model;
         private List<SimpleFN>? _FNList;
-        private ConnectType _connectType;
+        private TypeConnect _connectType;
         private bool _isConnected;
         private bool _isWorking;
 
