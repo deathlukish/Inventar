@@ -11,6 +11,10 @@ namespace FKCPObj
     public class ConfigLoad
     {
         private readonly string _Path = "./Config.json";
+        /// <summary>
+        /// Сохранить конфигурацию
+        /// </summary>
+        /// <param name="configLoad"></param>
         public void SaveConfig(BaseConfigToLoad configLoad)
         {
             
@@ -20,6 +24,10 @@ namespace FKCPObj
                 fs.WriteLine(jsonString);
             }
         }
+        /// <summary>
+        /// Загрузить конфигурацию
+        /// </summary>
+        /// <returns></returns>
         public BaseConfigToLoad LoadConfig()
         {
             if (!File.Exists(_Path))
