@@ -30,19 +30,14 @@ namespace FKCPObj
         /// <returns></returns>
         public BaseConfigToLoad LoadConfig()
         {
+            BaseConfigToLoad clients = new();
             if (!File.Exists(_Path))
             {
                 using (FileStream fs = File.Create(_Path))
                 {
 
                 }
-            }
-            JsonSerializerSettings setting = new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.All
-
-            };
-            BaseConfigToLoad clients = new();
+            }           
             using (StreamReader streamReader = new StreamReader(_Path))
             {
                
