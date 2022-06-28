@@ -1,4 +1,4 @@
-namespace Telegram.Bot.Examples.Polling;
+namespace TelegramBotPolling;
 
 public static class BotConfiguration
 {

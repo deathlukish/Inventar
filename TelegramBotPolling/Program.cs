@@ -1,5 +1,5 @@
 using Telegram.Bot;
-using Telegram.Bot.Examples.Polling;
+using TelegramBotPolling;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types.Enums;
 
