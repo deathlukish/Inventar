@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Telegram.Bot;
+using Telegram.Bot.Examples.Polling;
 
 namespace FKCPObj
 {
@@ -12,8 +13,8 @@ namespace FKCPObj
         
         TelegramBotClient Telegramm = new TelegramBotClient("");
         public Telega()
-        { 
-        
+        {
+           
         }
     }
 }
