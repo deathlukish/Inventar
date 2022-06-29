@@ -26,7 +26,7 @@ public static class UpdateHandlers
 
     public static async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
     {
-        Update?.Invoke(update.Message!.Text!);
+        
         var handler = update.Type switch
         {
             // UpdateType.Unknown:
@@ -57,6 +57,7 @@ public static class UpdateHandlers
 
     private static async Task BotOnMessageReceived(ITelegramBotClient botClient, Message message)
     {
+        Update?.Invoke(message.Text!);
         Console.WriteLine($"Receive message type: {message.Type}");
         if (message.Text is not { } messageText)
             return;
