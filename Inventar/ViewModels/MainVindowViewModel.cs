@@ -20,14 +20,10 @@ namespace Inventar.ViewModels
         public MainVindowViewModel()
         {
             BotInit bot = new BotInit(ConfigLoad.LoadConfig().ApiToken!.Token!);
-            //bot.LoadBot(ConfigLoad.LoadConfig().ApiToken!.Token!);
-            UpdateHandlers.Update += Show;
+            UpdateHandlers.Update += (string a)=>MessageBox.Show(a);
             bot.Send();
         }
-        public void Show(string obj)
-        {
-            MessageBox.Show(obj);
-        }
+
        
 
     }
