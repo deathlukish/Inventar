@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TelegramBotPolling;
 
 namespace Inventar
 {
@@ -25,6 +26,11 @@ namespace Inventar
         {
             InitializeComponent();
             this.DataContext = new MainVindowViewModel();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+           
         }
     }
 }

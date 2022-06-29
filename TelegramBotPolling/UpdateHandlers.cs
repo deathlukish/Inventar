@@ -166,7 +166,10 @@ public static class UpdateHandlers
                                                         replyMarkup: new ReplyKeyboardRemove());
         }
 
+
     }
+
+
 
     // Process Inline Keyboard callback data
     private static async Task BotOnCallbackQueryReceived(ITelegramBotClient botClient, CallbackQuery callbackQuery)

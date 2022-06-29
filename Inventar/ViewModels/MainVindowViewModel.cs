@@ -18,7 +18,9 @@ namespace Inventar.ViewModels
 
         public MainVindowViewModel()
         {
-            BotInit.LoadBot(ConfigLoad.LoadConfig().ApiToken.Token);
+            BotInit bot = new BotInit(ConfigLoad.LoadConfig().ApiToken!.Token!);
+            //bot.LoadBot(ConfigLoad.LoadConfig().ApiToken!.Token!);
+            bot.Send();
         }
 
        

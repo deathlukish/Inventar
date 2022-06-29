@@ -5,12 +5,19 @@ using TelegramBotPolling;
 
 namespace TelegramPolling
 {
-    public static class BotInit
+    public class BotInit
     {
-        public static async void LoadBot(string Token)
+        private readonly TelegramBotClient _client;
+        public BotInit(string Token)
         {
-            var bot = new TelegramBotClient(Token);
-            var me = await bot.GetMeAsync();
+            _client = new TelegramBotClient(Token);
+            LoadBot();
+        
+        }
+        private async void LoadBot()
+        {
+      
+            var me = await _client.GetMeAsync();
             using var cts = new CancellationTokenSource();
             // StartReceiving does not block the caller thread. Receiving is done on the ThreadPool.
             var receiverOptions = new ReceiverOptions()
@@ -19,12 +26,20 @@ namespace TelegramPolling
                 ThrowPendingUpdates = true,
             };
 
-            bot.StartReceiving(updateHandler: UpdateHandlers.HandleUpdateAsync,
+            _client.StartReceiving(updateHandler: UpdateHandlers.HandleUpdateAsync,
                                pollingErrorHandler: UpdateHandlers.PollingErrorHandler,
                                receiverOptions: receiverOptions,
                                cancellationToken: cts.Token);
             // Send cancellation request to stop bot
             //  cts.Cancel();
+            
+ 
+        }
+        public async void Send()
+        {
+
+            await _client.SendTextMessageAsync(chatId: 617719714,
+                                                 text: "Я запущен и готов к работе" );
 
         }
     }
