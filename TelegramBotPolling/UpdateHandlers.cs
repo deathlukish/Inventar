@@ -10,8 +10,8 @@ namespace TelegramBotPolling;
 
 public static class UpdateHandlers
 {
-    static Action<String>? Action;
-    public static event Action<String>? Update;
+    //private static readonly Action<string>? Action;
+    public static event Action<string>? Update;
     public static Task PollingErrorHandler(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
     {
         var ErrorMessage = exception switch

@@ -35,11 +35,11 @@ namespace TelegramPolling
             
  
         }
-        public async void Send()
+        public async void Send(string Text)
         {
 
             await _client.SendTextMessageAsync(chatId: 617719714,
-                                                 text: "Я запущен и готов к работе" );
+                                                 text: Text );
 
         }
     }
