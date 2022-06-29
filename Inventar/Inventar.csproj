@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FKCPObj\FKCPObj.csproj" />
+    <ProjectReference Include="..\TelegramBotPolling\TelegramPolling.csproj" />
   </ItemGroup>
 
 </Project>

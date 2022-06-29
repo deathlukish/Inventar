@@ -28,8 +28,9 @@ namespace FKCPObj
         /// Загрузить конфигурацию
         /// </summary>
         /// <returns></returns>
-        public BaseConfigToLoad LoadConfig()
+        public static BaseConfigToLoad LoadConfig()
         {
+            string _Path = "./Config.json";
             BaseConfigToLoad clients = new();
             if (!File.Exists(_Path))
             {
