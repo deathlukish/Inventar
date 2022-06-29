@@ -10,6 +10,8 @@ namespace TelegramBotPolling;
 
 public static class UpdateHandlers
 {
+    static Action<String>? Action;
+    public static event Action<String>? Update;
     public static Task PollingErrorHandler(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
     {
         var ErrorMessage = exception switch
@@ -24,6 +26,7 @@ public static class UpdateHandlers
 
     public static async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
     {
+        Update?.Invoke(update.Message!.Text!);
         var handler = update.Type switch
         {
             // UpdateType.Unknown:
