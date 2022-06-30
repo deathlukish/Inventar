@@ -11,7 +11,7 @@ namespace TelegramBotPolling;
 public static class UpdateHandlers
 {
     //private static readonly Action<string>? Action;
-    public static event Action<string>? Update;
+    public static event Action<Message>? Update;
     public static Task PollingErrorHandler(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
     {
         var ErrorMessage = exception switch
@@ -57,8 +57,8 @@ public static class UpdateHandlers
 
     private static async Task BotOnMessageReceived(ITelegramBotClient botClient, Message message)
     {
-        Update?.Invoke(message.Text!);
-        Console.WriteLine($"Receive message type: {message.Type}");
+        Update?.Invoke(message);
+        //Console.WriteLine($"Receive message type: {message.Type}");
         if (message.Text is not { } messageText)
             return;
 
@@ -72,7 +72,7 @@ public static class UpdateHandlers
             _           => Usage(botClient, message)
         };
         Message sentMessage = await action;
-        Console.WriteLine($"The message was sent with id: {sentMessage.MessageId}");
+       // Console.WriteLine($"The message was sent with id: {sentMessage.MessageId}");
 
         // Send inline keyboard
         // You can process responses in BotOnCallbackQueryReceived handler
