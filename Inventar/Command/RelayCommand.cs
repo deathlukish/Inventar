@@ -15,9 +15,7 @@ namespace Inventar.Command
             _Action = Action ?? throw new ArgumentNullException(nameof(Action));
             _CanExecute = CanExecute;
         }
-
         public override bool CanExecute(object parameter) => _CanExecute?.Invoke(parameter) ?? true;
-
         public override void Execute(object parameter) => _Action(parameter);
     }
 }
