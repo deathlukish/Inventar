@@ -60,16 +60,16 @@ namespace Inventar.ViewModels
         /// </summary>
         /// <returns></returns>
         public XDocument GetXMLQuery()
-        {
-            XAttribute Command;
+        {            
+            string items = "items.(Code, AltName, DeviceLicenses)";
             //создаем структуру XML-файла
             XDocument xmlQuery = new XDocument(
             new XElement("RK7Query", 
-                    new XElement("RK7Command2", Command =
+                    new XElement("RK7Command2", 
                     new XAttribute("CMD", "GetRefData"),
                     new XAttribute("RefName", "RESTAURANTS"),
-                    new XAttribute("PropMask", "items.(Code,AltName,DeviceLicenses)")))
-              );
+                    new XAttribute("PropMask", items)))
+            );
            return xmlQuery;
 
         }
