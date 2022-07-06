@@ -34,7 +34,6 @@ namespace Inventar.ViewModels
             string userName = "Internet";
             string passwd = "UeM5zP";
             byte[] authToken = Encoding.ASCII.GetBytes($"{userName}:{passwd}");
-           // string filePath = @"./GetRefData.xml";
             string url = "https://172.20.88.50:54322/rk7api/v0/xmlinterface.xml";
             string resultXML;
             httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) =>
@@ -46,7 +45,6 @@ namespace Inventar.ViewModels
                 using (var multipartFormContent = new MultipartFormDataContent())
                 {
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authToken));
-                   // var fileStreamContent = new StreamContent(System.IO.File.OpenRead(filePath));
                     var reqestXML = new StringContent(GetXMLQuery("RESTAURANTS","Code", "AltName", "DeviceLicenses").ToString());
                     multipartFormContent.Add(reqestXML);
                     var response = await client.PostAsync(url, multipartFormContent);
@@ -83,7 +81,7 @@ namespace Inventar.ViewModels
                 Prop.AppendJoin(",", items);              
                 xmlQuery.Element("RK7Query")?
                         .Element("RK7Command2")?
-                        .Add(new XAttribute("PropMask", $"items.({Prop.ToString()})"));
+                        .Add(new XAttribute("PropMask", $"items.({Prop})"));
 
             }            
            return xmlQuery;

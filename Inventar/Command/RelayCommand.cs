@@ -8,8 +8,8 @@ namespace Inventar.Command
 {
     internal class RelayCommand : BaseCommand
     {
-        private readonly Action<object>? _Action;
-        private readonly Func<object, bool>? _CanExecute;
+        private readonly Action<object> _Action;
+        private readonly Func<object, bool> _CanExecute;
         public RelayCommand(Action<object> Action, Func<object, bool> CanExecute)
         {
             _Action = Action ?? throw new ArgumentNullException(nameof(Action));
