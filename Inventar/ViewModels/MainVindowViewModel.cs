@@ -1,6 +1,7 @@
 ﻿using FKCPObj;
 using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -22,7 +23,7 @@ namespace Inventar.ViewModels
             UpdateHandlers.Update += (Message a)=>MessageBox.Show(a.From.ToString());
 
             GetRef();
-            //RetXML();
+            //GetXMLQuery("RESTAURANTS", "Code", "AltName", "DeviceLicenses");
         }
         /// <summary>
         /// Отправка запроса на сервер и получения результата в виде XML
@@ -33,7 +34,7 @@ namespace Inventar.ViewModels
             string userName = "Internet";
             string passwd = "UeM5zP";
             byte[] authToken = Encoding.ASCII.GetBytes($"{userName}:{passwd}");
-            string filePath = @"./GetRefData.xml";
+           // string filePath = @"./GetRefData.xml";
             string url = "https://172.20.88.50:54322/rk7api/v0/xmlinterface.xml";
             string resultXML;
             httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) =>
@@ -46,7 +47,7 @@ namespace Inventar.ViewModels
                 {
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authToken));
                    // var fileStreamContent = new StreamContent(System.IO.File.OpenRead(filePath));
-                    var reqestXML = new StringContent(GetXMLQuery().ToString());
+                    var reqestXML = new StringContent(GetXMLQuery("RESTAURANTS","Code", "AltName", "DeviceLicenses").ToString());
                     multipartFormContent.Add(reqestXML);
                     var response = await client.PostAsync(url, multipartFormContent);
                     response.EnsureSuccessStatusCode();
@@ -56,23 +57,36 @@ namespace Inventar.ViewModels
             }
         }
         /// <summary>
-        /// Метод формирования XML запроса
+        /// Метод формироания XML-запроса для сервера
         /// </summary>
-        /// <returns></returns>
-        public XDocument GetXMLQuery()
-        {            
-            string items = "items.(Code, AltName, DeviceLicenses)";
-            //создаем структуру XML-файла
+        /// <param name="RefName">
+        /// Имя справочника в коллекции справочников сервера
+        /// </param>
+        /// <param name="items">
+        /// Список атрибутов для фильтрации на стороне сервера
+        /// </param>
+        /// <returns>
+        /// XDocument готовый для отправки на сервер
+        /// </returns>
+        public XDocument GetXMLQuery(string RefName, params string[] items)
+        {
             XDocument xmlQuery = new XDocument(
             new XElement("RK7Query", 
                     new XElement("RK7Command2", 
                     new XAttribute("CMD", "GetRefData"),
-                    new XAttribute("RefName", "RESTAURANTS"),
-                    new XAttribute("PropMask", items)))
+                    new XAttribute("RefName", "RESTAURANTS")))
+                
             );
+            if (items.Length != 0)
+            {
+                StringBuilder Prop = new StringBuilder();
+                Prop.AppendJoin(",", items);              
+                xmlQuery.Element("RK7Query")?
+                        .Element("RK7Command2")?
+                        .Add(new XAttribute("PropMask", $"items.({Prop.ToString()})"));
+
+            }            
            return xmlQuery;
-
         }
-
     }
 }
