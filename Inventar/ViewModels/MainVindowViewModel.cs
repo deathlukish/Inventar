@@ -68,13 +68,13 @@ namespace Inventar.ViewModels
         /// <returns>
         /// XDocument готовый для отправки на сервер
         /// </returns>
-        public XDocument GetXMLQuery(string RefName, params string[] items)
+        public static XDocument GetXMLQuery(string RefName, params string[] items)
         {
             XDocument xmlQuery = new XDocument(
             new XElement("RK7Query", 
                     new XElement("RK7Command2", 
                     new XAttribute("CMD", "GetRefData"),
-                    new XAttribute("RefName", "RESTAURANTS")))
+                    new XAttribute("RefName", RefName)))
                 
             );
             if (items.Length != 0)
