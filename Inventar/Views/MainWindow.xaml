@@ -9,7 +9,7 @@
         Title="MainWindow" Height="450" Width="800">
 
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="370,253,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="370,253,0,0" VerticalAlignment="Top" Command="{Binding OpenConfig}"/>
 
     </Grid>
 </Window>

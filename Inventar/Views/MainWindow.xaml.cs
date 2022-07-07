@@ -28,9 +28,5 @@ namespace Inventar
             this.DataContext = new MainVindowViewModel();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-           
-        }
     }
 }

@@ -11,7 +11,8 @@ namespace FKCPObj.Config
         /// <summary>
         /// Токен бота
         /// </summary>
-        public string? Token { get; set; } 
+        public string? Token { get;
+            set; } 
         /// <summary>
         /// Имя бота
         /// </summary>
