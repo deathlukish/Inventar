@@ -9,6 +9,7 @@ namespace FKCPObj.Config
     public class BaseConfigToLoad
     {
         public ApiToken? ApiToken { get; set; } = new();
+        public ConfigXMLInterface? XMLInterface { get; set; } = new();
         public List<ListenerForBot>? ListenerForBot { get; set; } = new();
     }
 }

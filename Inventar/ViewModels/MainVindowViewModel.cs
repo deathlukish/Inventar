@@ -19,9 +19,10 @@ namespace Inventar.ViewModels
 
         public MainVindowViewModel()
         {
-            BotInit bot = new BotInit(ConfigLoad.LoadConfig().ApiToken!.Token!);
+            
+            BotInit bot = new BotInit(ConfigLoad.GetConfig().ApiToken!.Token!);
+            //BotInit bot = new BotInit(ConfigLoad.LoadConfig().ApiToken!.Token!);
             UpdateHandlers.Update += (Message a)=>MessageBox.Show(a.From.ToString());
-
             GetRef();
             //GetXMLQuery("RESTAURANTS", "Code", "AltName", "DeviceLicenses");
         }

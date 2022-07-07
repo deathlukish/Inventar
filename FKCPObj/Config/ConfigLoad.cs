@@ -8,18 +8,24 @@ using System.Threading.Tasks;
 
 namespace FKCPObj
 {
-    public class ConfigLoad
+    public static class ConfigLoad
     {
-        private readonly string _Path = "./Config.json";
+        private static readonly string _path = "./Config.json";
+        private static BaseConfigToLoad? _config;        
+        static ConfigLoad()
+        {
+            _config = LoadConfig();
+        }
+
         /// <summary>
         /// Сохранить конфигурацию
         /// </summary>
         /// <param name="configLoad"></param>
-        public void SaveConfig(BaseConfigToLoad configLoad)
+        public static void SaveConfig()
         {
-            
-            var jsonString = JsonConvert.SerializeObject(configLoad);
-            using (StreamWriter fs = new StreamWriter(_Path))
+            string _path = "./Config.json";
+            var jsonString = JsonConvert.SerializeObject(_config);
+            using (StreamWriter fs = new StreamWriter(_path))
             {
                 fs.WriteLine(jsonString);
             }
@@ -28,7 +34,7 @@ namespace FKCPObj
         /// Загрузить конфигурацию
         /// </summary>
         /// <returns></returns>
-        public static BaseConfigToLoad LoadConfig()
+        private static BaseConfigToLoad LoadConfig()
         {
             string _Path = "./Config.json";
             BaseConfigToLoad clients = new();
@@ -48,5 +54,6 @@ namespace FKCPObj
             return clients;
 
         }
+        public static BaseConfigToLoad GetConfig() => _config;
     }
 }
