@@ -19,15 +19,15 @@ namespace Inventar.ViewModels
         private void OnSaveConfig(object p) => ConfigLoad.SaveConfig();
 
 
-        //private BaseConfigToLoad _baseConfig;
+        private BaseConfigToLoad _baseConfig;
         public string BotName { get => _botName; set => Set(ref _botName, value); }
         public string BotToken { get => _botToken; set => Set(ref _botToken, value); }
         public ConfiguratorViewModel()
         {
             SaveConfig = new RelayCommand(OnSaveConfig, CanSaveConfig);
-           // _baseConfig = ConfigLoad.GetConfig();
-            _botName =  ConfigLoad.GetConfig().ApiToken.Name;
-            _botToken = ConfigLoad.GetConfig().ApiToken.Token;
+            _baseConfig = ConfigLoad.GetConfig();
+            _botName =  _baseConfig.ApiToken.Name;
+            _botToken = _baseConfig.ApiToken.Token;
         }
     }
 }
