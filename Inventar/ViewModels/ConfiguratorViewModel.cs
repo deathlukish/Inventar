@@ -20,7 +20,7 @@ namespace Inventar.ViewModels
         public string BotToken { get => _baseConfig.ApiToken.Token; set => _baseConfig.ApiToken.Token = value; }
         public string XmlUrl { get => _baseConfig.XMLInterface.ServerURL; set => _baseConfig.XMLInterface.ServerURL = value; }
         public string XmlUSer { get => _baseConfig.XMLInterface.Login; set => _baseConfig.XMLInterface.Login = value; }
-        public string XmlPas { get => _baseConfig.XMLInterface.Password; set => _baseConfig.XMLInterface.Password = value; }
+        public string XmlPas { get => "********"; set => _baseConfig.XMLInterface.Password = value; }
         public ConfiguratorViewModel()
         {
             SaveConfig = new RelayCommand(OnSaveConfig, CanSaveConfig);

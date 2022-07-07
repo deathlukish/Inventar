@@ -26,7 +26,6 @@ namespace Inventar.ViewModels
         {
             OpenConfig = new RelayCommand(OnOpenConfig, CanOpenGonfig);
             BotInit bot = new BotInit(ConfigLoad.GetConfig().ApiToken!.Token!);
-            //BotInit bot = new BotInit(ConfigLoad.LoadConfig().ApiToken!.Token!);
             UpdateHandlers.Update += (Message a)=>MessageBox.Show(a.From.ToString());
             GetRef();
             //GetXMLQuery("RESTAURANTS", "Code", "AltName", "DeviceLicenses");
@@ -54,8 +53,15 @@ namespace Inventar.ViewModels
                     var reqestXML = new StringContent(GetXMLQuery("RESTAURANTS","Code", "AltName", "DeviceLicenses").ToString());
                     multipartFormContent.Add(reqestXML);
                     var response = await client.PostAsync(url, multipartFormContent);
-                    response.EnsureSuccessStatusCode();
-                    resultXML = await response.Content.ReadAsStringAsync();
+                    try
+                    {
+                        response.EnsureSuccessStatusCode();
+                        resultXML = await response.Content.ReadAsStringAsync();
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show($"Уппс {ex.ToString}") ;
+                    }
 
                 }
             }
