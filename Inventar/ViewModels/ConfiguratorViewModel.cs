@@ -12,22 +12,20 @@ namespace Inventar.ViewModels
 {
     internal class ConfiguratorViewModel:ViewModel
     {
-        private string _botName;
-        private string _botToken;
+        private BaseConfigToLoad _baseConfig;
         public ICommand SaveConfig { get; }
         private bool CanSaveConfig(object p) => true;
         private void OnSaveConfig(object p) => ConfigLoad.SaveConfig();
-
-
-        private BaseConfigToLoad _baseConfig;
-        public string BotName { get => _botName; set => Set(ref _botName, value); }
-        public string BotToken { get => _botToken; set => Set(ref _botToken, value); }
+        public string BotName { get => _baseConfig.ApiToken.Name; set => _baseConfig.ApiToken.Name = value; }
+        public string BotToken { get => _baseConfig.ApiToken.Token; set => _baseConfig.ApiToken.Token = value; }
+        public string XmlUrl { get => _baseConfig.XMLInterface.ServerURL; set => _baseConfig.XMLInterface.ServerURL = value; }
+        public string XmlUSer { get => _baseConfig.XMLInterface.Login; set => _baseConfig.XMLInterface.Login = value; }
+        public string XmlPas { get => _baseConfig.XMLInterface.Password; set => _baseConfig.XMLInterface.Password = value; }
         public ConfiguratorViewModel()
         {
             SaveConfig = new RelayCommand(OnSaveConfig, CanSaveConfig);
             _baseConfig = ConfigLoad.GetConfig();
-            _botName =  _baseConfig.ApiToken.Name;
-            _botToken = _baseConfig.ApiToken.Token;
+
         }
     }
 }

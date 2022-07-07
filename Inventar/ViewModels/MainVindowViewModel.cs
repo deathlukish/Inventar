@@ -37,10 +37,10 @@ namespace Inventar.ViewModels
         public async void GetRef()
         {
             HttpClientHandler httpClientHandler = new HttpClientHandler();
-            string userName = "Internet";
-            string passwd = "UeM5zP";
+            string userName = ConfigLoad.GetConfig().XMLInterface.Login;
+            string passwd = ConfigLoad.GetConfig().XMLInterface.Password;
             byte[] authToken = Encoding.ASCII.GetBytes($"{userName}:{passwd}");
-            string url = "https://172.20.88.50:54322/rk7api/v0/xmlinterface.xml";
+            string url = ConfigLoad.GetConfig().XMLInterface.ServerURL;
             string resultXML;
             httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) =>
             {
