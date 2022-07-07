@@ -1,10 +1,5 @@
 ﻿using FKCPObj.Config;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FKCPObj
 {
@@ -23,7 +18,7 @@ namespace FKCPObj
         /// <param name="configLoad"></param>
         public static void SaveConfig()
         {
-            string _path = "./Config.json";
+            
             var jsonString = JsonConvert.SerializeObject(_config);
             using (StreamWriter fs = new StreamWriter(_path))
             {
@@ -36,16 +31,16 @@ namespace FKCPObj
         /// <returns></returns>
         private static BaseConfigToLoad LoadConfig()
         {
-            string _Path = "./Config.json";
+            
             BaseConfigToLoad clients = new();
-            if (!File.Exists(_Path))
+            if (!File.Exists(_path))
             {
-                using (FileStream fs = File.Create(_Path))
+                using (FileStream fs = File.Create(_path))
                 {
 
                 }
             }           
-            using (StreamReader streamReader = new StreamReader(_Path))
+            using (StreamReader streamReader = new StreamReader(_path))
             {
                
                 clients = JsonConvert.DeserializeObject<BaseConfigToLoad>(streamReader.ReadToEnd());
@@ -54,6 +49,10 @@ namespace FKCPObj
             return clients;
 
         }
+        /// <summary>
+        /// Получить объект конфигурации
+        /// </summary>
+        /// <returns></returns>
         public static BaseConfigToLoad GetConfig() => _config;
     }
 }
