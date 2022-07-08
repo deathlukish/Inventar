@@ -27,7 +27,7 @@ namespace FKCPObj.XmlInterface
                     .Element("Item")?
                     .Attribute("LicenseTxt")?.Value
                     .ToString(),
-                    ExpiresAT = step?.Attribute("ExpiresAT").Value
+                    ExpiresAT = step?.Attribute("ExpiresAT").Value,
                     Ident = Convert.ToUInt64(step?.Attribute("Ident")?.Value),
                     AltName = step?.Attribute("AltName")?.Value,
                     
