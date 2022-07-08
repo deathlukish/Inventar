@@ -19,7 +19,9 @@ namespace FKCPObj.SimleClass
         private uint _OZUSize;
         private TypeLicense _TypeLicense;
         private DateOnly _DateEndLicense;
-        public string NetName { get; set; }
+        public string? LicenseTxt { get; set; }
+        public string? NetName { get; set; }
+        public LicTest? licTest { get; set; }
 
     }
 }

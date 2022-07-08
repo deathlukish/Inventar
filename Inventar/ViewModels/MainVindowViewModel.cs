@@ -1,5 +1,6 @@
 ﻿using FKCPObj;
 using FKCPObj.SimleClass;
+using FKCPObj.SimpleClass;
 using FKCPObj.XmlInterface;
 using Inventar.Command;
 using Inventar.Views;
@@ -42,16 +43,14 @@ namespace Inventar.ViewModels
                 .Elements("Item")?
                 .Select (step => new SimpleOP
                 {
+                    LicenseTxt = step.Element("DeviceLicenses")?
+                    .Element("Items")?
+                    .Element("Item")?
+                    .Attribute("LicenseTxt")?.Value                    
+                    .ToString(),
                     NetName = step?.Attribute("Ident")?.Value
+
                 })?.ToList();
-            //var my = (from s in doc.Descendants("Items")
-            //          select new
-            //          {
-            //              Id = s.Element("Item").Value
-
-            //          }).ToList();
-
-
 
         }
 
