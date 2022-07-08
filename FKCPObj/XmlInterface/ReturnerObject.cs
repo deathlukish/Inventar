@@ -27,7 +27,11 @@ namespace FKCPObj.XmlInterface
                     .Element("Item")?
                     .Attribute("LicenseTxt")?.Value
                     .ToString(),
-                    NetName = step?.Attribute("Ident")?.Value
+                    ExpiresAT = step?.Attribute("ExpiresAT").Value
+                    Ident = Convert.ToUInt64(step?.Attribute("Ident")?.Value),
+                    AltName = step?.Attribute("AltName")?.Value,
+                    
+
 
                 })?.ToList();
             return b;
