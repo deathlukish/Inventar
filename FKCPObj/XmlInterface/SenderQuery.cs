@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace FKCPObj.XmlInterface
 {
-    public class SenderQuery
+    internal class SenderQuery
     {
         private string resultXML = "";
 

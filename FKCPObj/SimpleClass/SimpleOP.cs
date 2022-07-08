@@ -1,11 +1,5 @@
-﻿using FKCPObj.SimpleClass;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FKCPObj.SimleClass
+﻿
+namespace FKCPObj.SimpleClass
 {
     public class SimpleOP
     {
@@ -21,7 +15,6 @@ namespace FKCPObj.SimleClass
         private DateOnly _DateEndLicense;
         public string? LicenseTxt { get; set; }
         public string? NetName { get; set; }
-        public LicTest? licTest { get; set; }
 
     }
 }

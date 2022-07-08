@@ -1,5 +1,4 @@
 ﻿using FKCPObj;
-using FKCPObj.SimleClass;
 using FKCPObj.SimpleClass;
 using FKCPObj.XmlInterface;
 using Inventar.Command;
@@ -15,7 +14,6 @@ using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using System.Xml.Linq;
-using System.Xml.Serialization;
 using Telegram.Bot.Types;
 using TelegramBotPolling;
 using TelegramPolling;
@@ -33,24 +31,8 @@ namespace Inventar.ViewModels
             OpenConfig = new RelayCommand(OnOpenConfig, CanOpenGonfig);
             BotInit bot = new BotInit(ConfigLoad.GetConfig().ApiToken!.Token!);
             UpdateHandlers.Update += (Message a)=>MessageBox.Show(a.From?.ToString());
-            SenderQuery senderQuery = new();
-            string a = senderQuery.GetResultXML();
-            XDocument doc = XDocument.Parse(a);
-            List<SimpleOP>? b = doc.Element("RK7QueryResult")?
-                .Element("CommandResult")?
-                .Element("RK7Reference")?
-                .Element("Items")?
-                .Elements("Item")?
-                .Select (step => new SimpleOP
-                {
-                    LicenseTxt = step.Element("DeviceLicenses")?
-                    .Element("Items")?
-                    .Element("Item")?
-                    .Attribute("LicenseTxt")?.Value                    
-                    .ToString(),
-                    NetName = step?.Attribute("Ident")?.Value
-
-                })?.ToList();
+            ReturnerObject returner = new();
+            var a = returner.GetAllOp();
 
         }
 
