@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FKCPObj.SimpleClass;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -11,9 +12,10 @@ namespace FKCPObj.XmlInterface
     internal class SenderQuery
     {
         private string resultXML = "";
-
-        public string GetResultXML()
+        private string XmlQuery = "";
+        public string GetResultXML(RefNames refNames)
         {
+            GetXMLQuery(refNames.ToString());            
             Task task = Task.Run(LoadRefAsync);
             task.Wait();
             return resultXML;
@@ -25,10 +27,10 @@ namespace FKCPObj.XmlInterface
         private async Task LoadRefAsync()
         {
             HttpClientHandler httpClientHandler = new HttpClientHandler();
-            string userName = ConfigLoad.GetConfig()?.XMLInterface?.Login;
-            string passwd = ConfigLoad.GetConfig().XMLInterface.Password;
+            string? userName = ConfigLoad.GetConfig()?.XMLInterface?.Login;
+            string? passwd = ConfigLoad.GetConfig()?.XMLInterface?.Password;
             byte[] authToken = Encoding.ASCII.GetBytes($"{userName}:{passwd}");
-            string url = ConfigLoad.GetConfig().XMLInterface.ServerURL;
+            string? url = ConfigLoad.GetConfig()?.XMLInterface?.ServerURL;
             httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) =>
             {
                 return true;
@@ -38,7 +40,7 @@ namespace FKCPObj.XmlInterface
                 using (var multipartFormContent = new MultipartFormDataContent())
                 {
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authToken));
-                    var reqestXML = new StringContent(GetXMLQuery("RESTAURANTS", "Code", "AltName", "DeviceLicenses").ToString());
+                    var reqestXML = new StringContent(XmlQuery);
                     multipartFormContent.Add(reqestXML);
                     var response = await client.PostAsync(url, multipartFormContent);
                     try
@@ -69,7 +71,7 @@ namespace FKCPObj.XmlInterface
         /// <returns>
         /// XDocument готовый для отправки на сервер
         /// </returns>
-        private static XDocument GetXMLQuery(string RefName, params string[] items)
+        private void GetXMLQuery(string RefName, params string[] items)
         {
             XDocument xmlQuery = new XDocument(
             new XElement("RK7Query",
@@ -87,7 +89,7 @@ namespace FKCPObj.XmlInterface
                         .Add(new XAttribute("PropMask", $"items.({Prop})"));
 
             }
-            return xmlQuery;
+            XmlQuery = xmlQuery.ToString();
         }
 
     }

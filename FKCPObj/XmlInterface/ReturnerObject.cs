@@ -10,10 +10,10 @@ namespace FKCPObj.XmlInterface
 {
     public class ReturnerObject
     {
-        public List<SimpleOP> GetAllOp()
+        public List<SimpleOP>? GetAllOp()
         {
             SenderQuery senderQuery = new();
-            string a = senderQuery.GetResultXML();
+            string a = senderQuery.GetResultXML(RefNames.RESTAURANTS);
             XDocument doc = XDocument.Parse(a);
             List<SimpleOP>? b = doc.Element("RK7QueryResult")?
                 .Element("CommandResult")?
@@ -22,17 +22,20 @@ namespace FKCPObj.XmlInterface
                 .Elements("Item")?
                 .Select(step => new SimpleOP
                 {
-                    LicenseTxt = step.Element("DeviceLicenses")?
+                    Ident = Convert.ToUInt32(step?.Attribute("Ident")?.Value),
+                    AltName = step?.Attribute("AltName")?.Value,
+                    Code = Convert.ToUInt64(step?.Attribute("Code")?.Value),
+                    Status = step?.Attribute("Status")?.Value,
+                    LicenseTxt = step?.Element("DeviceLicenses")?
                     .Element("Items")?
                     .Element("Item")?
                     .Attribute("LicenseTxt")?.Value
                     .ToString(),
-                    ExpiresAT = step?.Attribute("ExpiresAT").Value,
-                    Ident = Convert.ToUInt64(step?.Attribute("Ident")?.Value),
-                    AltName = step?.Attribute("AltName")?.Value,
-                    
-
-
+                    ExpiresAT = step?.Element("DeviceLicenses")?
+                    .Element("Items")?
+                    .Element("Item")?
+                    .Attribute("ExpiresAT")?.Value
+                    .ToString(),
                 })?.ToList();
             return b;
         }
