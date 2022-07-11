@@ -12,8 +12,8 @@ namespace FKCPObj.XmlInterface
     {
         public List<SimpleOP>? GetAllOp()
         {
-            SenderQuery senderQuery = new();
-            string a = senderQuery.GetResultXML(RefNames.RESTAURANTS);
+            //SenderQuery senderQuery = new();
+            string a = SenderQuery.GetResultXML(RefNames.RESTAURANTS);
             XDocument doc = XDocument.Parse(a);
             List<SimpleOP>? b = doc.Element("RK7QueryResult")?
                 .Element("CommandResult")?

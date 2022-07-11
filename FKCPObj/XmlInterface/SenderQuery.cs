@@ -9,11 +9,11 @@ using System.Xml.Linq;
 
 namespace FKCPObj.XmlInterface
 {
-    internal class SenderQuery
+    internal static class SenderQuery
     {
-        private string resultXML = "";
-        private string XmlQuery = "";
-        public string GetResultXML(RefNames refNames)
+        private static string resultXML = "";
+        private static string XmlQuery = "";
+        public static string GetResultXML(RefNames refNames)
         {
             GetXMLQuery(refNames.ToString());            
             Task task = Task.Run(LoadRefAsync);
@@ -24,7 +24,7 @@ namespace FKCPObj.XmlInterface
         /// <summary>
         /// Отправка запроса на сервер и получения результата в виде XML
         /// </summary>
-        private async Task LoadRefAsync()
+        private static async Task LoadRefAsync()
         {
             HttpClientHandler httpClientHandler = new HttpClientHandler();
             string? userName = ConfigLoad.GetConfig()?.XMLInterface?.Login;
@@ -71,7 +71,7 @@ namespace FKCPObj.XmlInterface
         /// <returns>
         /// XDocument готовый для отправки на сервер
         /// </returns>
-        private void GetXMLQuery(string RefName, params string[] items)
+        private static void GetXMLQuery(string RefName, params string[] items)
         {
             XDocument xmlQuery = new XDocument(
             new XElement("RK7Query",
