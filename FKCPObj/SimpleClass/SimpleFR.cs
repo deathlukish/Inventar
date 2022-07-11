@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FKCPObj.SimleClass
+namespace FKCPObj.SimpleClass
 {
     public class SimpleFR
     {

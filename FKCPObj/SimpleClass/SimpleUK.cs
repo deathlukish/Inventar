@@ -1,7 +1,7 @@
 ﻿
 using FKCPObj.SimpleClass;
 
-namespace FKCPObj.SimleClass
+namespace FKCPObj.SimpleClass
 {
     public class SimpleUK
     {

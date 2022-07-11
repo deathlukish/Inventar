@@ -13,9 +13,9 @@ namespace FKCPObj.XmlInterface
     {
         private static string resultXML = "";
         private static string XmlQuery = "";
-        public static string GetResultXML(RefNames refNames)
+        public static string GetResultXML(RefNames refNames, params string[] prop)
         {
-            GetXMLQuery(refNames.ToString());            
+            GetXMLQuery(refNames.ToString(), prop);            
             Task task = Task.Run(LoadRefAsync);
             task.Wait();
             return resultXML;

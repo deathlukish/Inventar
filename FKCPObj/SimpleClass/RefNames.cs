@@ -8,6 +8,7 @@ namespace FKCPObj.SimpleClass
 {
     internal enum RefNames
     {
-        RESTAURANTS = 1
+        RESTAURANTS = 1,
+        CASHES = 2
     }
 }

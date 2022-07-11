@@ -12,8 +12,8 @@ namespace FKCPObj.XmlInterface
     {
         public List<SimpleOP>? GetAllOp()
         {
-            //SenderQuery senderQuery = new();
-            string a = SenderQuery.GetResultXML(RefNames.RESTAURANTS);
+        
+            string a = SenderQuery.GetResultXML(RefNames.RESTAURANTS, "Code", "AltName", "DeviceLicenses");
             XDocument doc = XDocument.Parse(a);
             List<SimpleOP>? b = doc.Element("RK7QueryResult")?
                 .Element("CommandResult")?
@@ -36,6 +36,35 @@ namespace FKCPObj.XmlInterface
                     .Element("Item")?
                     .Attribute("ExpiresAT")?.Value
                     .ToString(),
+                })?.ToList();
+            return b;
+        }
+
+        public List<SimpleUK> GetAllUK()
+        {
+            string a = SenderQuery.GetResultXML(RefNames.CASHES);
+            XDocument doc = XDocument.Parse(a);
+            List<SimpleUK>? b = doc.Element("RK7QueryResult")?
+                .Element("CommandResult")?
+                .Element("RK7Reference")?
+                .Element("Items")?
+                .Elements("Item")?
+                .Select(step => new SimpleUK
+                {
+                    //Ident = Convert.ToUInt32(step?.Attribute("Ident")?.Value),
+                    //AltName = step?.Attribute("AltName")?.Value,
+                    //Code = Convert.ToUInt64(step?.Attribute("Code")?.Value),
+                    //Status = step?.Attribute("Status")?.Value,
+                    //LicenseTxt = step?.Element("DeviceLicenses")?
+                    //.Element("Items")?
+                    //.Element("Item")?
+                    //.Attribute("LicenseTxt")?.Value
+                    //.ToString(),
+                    //ExpiresAT = step?.Element("DeviceLicenses")?
+                    //.Element("Items")?
+                    //.Element("Item")?
+                    //.Attribute("ExpiresAT")?.Value
+                    //.ToString(),
                 })?.ToList();
             return b;
         }
