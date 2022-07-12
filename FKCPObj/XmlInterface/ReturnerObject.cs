@@ -55,6 +55,8 @@ namespace FKCPObj.XmlInterface
                 .Elements("Item")?
                 .Select(step => new SimpleUK
                 {
+                    Ident = Convert.ToInt32(step.Attribute("Ident")?.Value),
+                    Name = step.Attribute("Name").Value
                     //Ident = Convert.ToUInt32(step?.Attribute("Ident")?.Value),
                     //AltName = step?.Attribute("AltName")?.Value,
                     //Code = Convert.ToUInt64(step?.Attribute("Code")?.Value),

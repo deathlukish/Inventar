@@ -10,6 +10,8 @@ namespace FKCPObj.SimpleClass
         private List<SimpleFR> _FRs;
         private List<SimpleTerm> Terminal;
         private bool _IsActive;
+        public int Ident { get; set; }
+        public string? Name { get; set; }
 
     }
 
