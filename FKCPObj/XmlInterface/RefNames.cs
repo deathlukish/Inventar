@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FKCPObj.SimpleClass
+namespace FKCPObj.XmlInterface
 {
-    internal enum Rk7Cmd
+    internal enum RefNames
     {
-        GetRefData = 0,
-        SetRefData = 1
+        RESTAURANTS = 1,
+        CASHES = 2
     }
 }

@@ -1,9 +1,4 @@
 ﻿using FKCPObj.SimpleClass;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace FKCPObj.XmlInterface
@@ -12,9 +7,10 @@ namespace FKCPObj.XmlInterface
     {
         public List<SimpleOP>? GetAllOp()
         {
-
-            //string a = SenderQuery.GetResultXML(RefNames.RESTAURANTS, "Code", "AltName", "DeviceLicenses");
-            string a = "";
+            XmlQueryCreater xmlQuery = new();
+            xmlQuery.AddCommand(Rk7Cmd.GetRefData, RefNames.RESTAURANTS, "Code", "AltName", "DeviceLicenses", "Status");
+            string a = SenderQuery.GetResultXML(xmlQuery);
+            
             XDocument doc = XDocument.Parse(a);
             List<SimpleOP>? b = doc.Element("RK7QueryResult")?
                 .Element("CommandResult")?
@@ -45,7 +41,7 @@ namespace FKCPObj.XmlInterface
         {
             XmlQueryCreater xmlQuery = new();
             xmlQuery.AddCommand(Rk7Cmd.GetRefData, RefNames.CASHES);
-            xmlQuery.AddCommand(Rk7Cmd.GetRefData, RefNames.RESTAURANTS, "Code", "AltName", "DeviceLicenses");
+            xmlQuery.AddCommand(Rk7Cmd.GetRefData, RefNames.RESTAURANTS, "Code", "AltName", "DeviceLicenses", "Status");
             string a = SenderQuery.GetResultXML(xmlQuery);
 
 

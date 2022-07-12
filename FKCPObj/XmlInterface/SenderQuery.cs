@@ -1,11 +1,5 @@
-﻿using FKCPObj.SimpleClass;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace FKCPObj.XmlInterface
 {
@@ -13,6 +7,15 @@ namespace FKCPObj.XmlInterface
     {
         private static string resultXML = "";
         private static string XmlQuery = "";
+        /// <summary>
+        /// Получить результат команды из XML интерфейсе
+        /// </summary>
+        /// <param name="xmlQuery">
+        /// XML файл команды
+        /// </param>
+        /// <returns>
+        /// Файл XML ответа из интерфейса
+        /// </returns>
         public static string GetResultXML(XmlQueryCreater xmlQuery)
         {
             XmlQuery = xmlQuery.ToString();           

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace FKCPObj.SimpleClass
+namespace FKCPObj.XmlInterface
 {
     internal class XmlQueryCreater
     {
@@ -48,7 +48,7 @@ namespace FKCPObj.SimpleClass
         }
         public override string ToString()
         {
-            return this.xmlQuery.ToString();
+            return xmlQuery.ToString();
         }
 
     }
