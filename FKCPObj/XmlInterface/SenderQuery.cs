@@ -13,9 +13,9 @@ namespace FKCPObj.XmlInterface
     {
         private static string resultXML = "";
         private static string XmlQuery = "";
-        public static string GetResultXML(RefNames refNames, params string[] prop)
+        public static string GetResultXML(XmlQueryCreater xmlQuery)
         {
-            GetXMLQuery(refNames.ToString(), prop);            
+            XmlQuery = xmlQuery.ToString();           
             Task task = Task.Run(LoadRefAsync);
             task.Wait();
             return resultXML;
@@ -71,26 +71,26 @@ namespace FKCPObj.XmlInterface
         /// <returns>
         /// XDocument готовый для отправки на сервер
         /// </returns>
-        private static void GetXMLQuery(string RefName, params string[] items)
-        {
-            XDocument xmlQuery = new XDocument(
-            new XElement("RK7Query",
-                    new XElement("RK7Command2",
-                    new XAttribute("CMD", "GetRefData"),
-                    new XAttribute("RefName", RefName)))
+        //private static void GetXMLQuery(string RefName, params string[] items)
+        //{
+        //    XDocument xmlQuery = new XDocument(
+        //    new XElement("RK7Query",
+        //            new XElement("RK7Command2",
+        //            new XAttribute("CMD", "GetRefData"),
+        //            new XAttribute("RefName", RefName)))
 
-            );
-            if (items.Length != 0)
-            {
-                StringBuilder Prop = new StringBuilder();
-                Prop.AppendJoin(",", items);
-                xmlQuery.Element("RK7Query")?
-                        .Element("RK7Command2")?
-                        .Add(new XAttribute("PropMask", $"items.({Prop})"));
+        //    );
+        //    if (items.Length != 0)
+        //    {
+        //        StringBuilder Prop = new StringBuilder();
+        //        Prop.AppendJoin(",", items);
+        //        xmlQuery.Element("RK7Query")?
+        //                .Element("RK7Command2")?
+        //                .Add(new XAttribute("PropMask", $"items.({Prop})"));
 
-            }
-            XmlQuery = xmlQuery.ToString();
-        }
+        //    }
+        //    XmlQuery = xmlQuery.ToString();
+        //}
 
     }
 }
