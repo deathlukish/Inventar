@@ -14,7 +14,19 @@ namespace FKCPObj.SimpleClass
         {
             xmlQuery = new XDocument(new XElement("RK7Query"));
         }
-
+        /// <summary>
+        /// Добавить команду в файл
+        /// </summary>
+        /// <param name="cmd">
+        /// Команда для сервера
+        /// </param>
+        /// <param name="refName">
+        /// Имя справочников
+        /// </param>
+        /// <param name="items">
+        /// Параметры фильтрации для сервера
+        /// </param>
+        /// <returns></returns>
         public XmlQueryCreater AddCommand(Rk7Cmd cmd, RefNames refName, params string[] items)
         {
             xmlQuery.Element("RK7Query")?

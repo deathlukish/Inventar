@@ -58,39 +58,6 @@ namespace FKCPObj.XmlInterface
             }
  
         }
-        /// <summary>
-        /// Метод формироания XML-запроса для сервера
-        /// </summary>
-        /// <param name="RefName">
-        /// Имя справочника в коллекции справочников сервера
-        /// </param>
-        /// <param name="items">
-        /// Список атрибутов для фильтрации на стороне сервера
-        /// Без атрибутов - без фильтрации
-        /// </param>
-        /// <returns>
-        /// XDocument готовый для отправки на сервер
-        /// </returns>
-        //private static void GetXMLQuery(string RefName, params string[] items)
-        //{
-        //    XDocument xmlQuery = new XDocument(
-        //    new XElement("RK7Query",
-        //            new XElement("RK7Command2",
-        //            new XAttribute("CMD", "GetRefData"),
-        //            new XAttribute("RefName", RefName)))
-
-        //    );
-        //    if (items.Length != 0)
-        //    {
-        //        StringBuilder Prop = new StringBuilder();
-        //        Prop.AppendJoin(",", items);
-        //        xmlQuery.Element("RK7Query")?
-        //                .Element("RK7Command2")?
-        //                .Add(new XAttribute("PropMask", $"items.({Prop})"));
-
-        //    }
-        //    XmlQuery = xmlQuery.ToString();
-        //}
-
+ 
     }
 }
