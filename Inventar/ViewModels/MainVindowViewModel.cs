@@ -32,7 +32,7 @@ namespace Inventar.ViewModels
             BotInit bot = new BotInit(ConfigLoad.GetConfig().ApiToken!.Token!);
             UpdateHandlers.Update += (Message a)=>MessageBox.Show(a.From?.ToString());
             ReturnerObject returner = new();
-            var a = returner.GetAllUK();
+            var a = returner.NewTestXML();
 
         }
 

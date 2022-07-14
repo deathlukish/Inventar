@@ -1,5 +1,6 @@
 ﻿using FKCPObj.SimpleClass;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace FKCPObj.XmlInterface
 {
@@ -9,7 +10,7 @@ namespace FKCPObj.XmlInterface
         {
             List<SimpleOP>? b =  new();
             XmlQueryCreater xmlQuery = new();
-            xmlQuery.AddCommand(Rk7Cmd.GetRefData, RefNames.RESTAURANTS, "Code", "AltName", "DeviceLicenses", "Status");
+            xmlQuery.AddCommand(Rk7Cmd.GetRefData, RefNames.RESTAURANTS, "Code", "AltName", "DeviceLicenses", "Childs");
             string a = SenderQuery.GetResultXML(xmlQuery);
             XDocument doc = XDocument.Parse(a);
             if (doc.Element("RK7QueryResult")?
@@ -73,6 +74,21 @@ namespace FKCPObj.XmlInterface
                     //.ToString(),
                 })?.ToList();
             return b;
+
+            
+        }
+        public CommandResults NewTestXML()
+        {
+            CommandResults simpleUKs = new CommandResults();
+            XmlQueryCreater xmlQuery = new();
+            xmlQuery.AddCommand(Rk7Cmd.GetRefData, RefNames.RESTAURANTS, "Code", "AltName", "DeviceLicenses", "Childs","Name");
+            string s = SenderQuery.GetResultXML(xmlQuery);
+            var xml = new XmlSerializer(typeof(CommandResults));
+            using (var sr = new StringReader(s))
+            {
+                simpleUKs = (CommandResults)xml.Deserialize(sr);
+            }
+            return simpleUKs;
         }
     }
 }
