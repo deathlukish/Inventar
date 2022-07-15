@@ -23,24 +23,40 @@ namespace FKCPObj.XmlInterface
         /// <param name="refName">
         /// Имя справочников
         /// </param>
+        /// <param name="onlyActive">
+        /// Запросить только неактивные записи
+        /// </param>
         /// <param name="items">
         /// Параметры фильтрации для сервера
         /// </param>
         /// <returns></returns>
-        public XmlQueryCreater AddCommand(Rk7Cmd cmd, RefNames refName, params string[] items)
+        public XmlQueryCreater AddCommand(Rk7Cmd cmd, RefNames refName,bool onlyActive, params string[] items)
         {
             xmlQuery.Element("RK7Query")?
                 .Add(new XElement("RK7Command2",
                     new XAttribute("CMD", cmd.ToString()),
                     new XAttribute("RefName", refName.ToString()))
-
+                   
             );
+            if (onlyActive)
+            {
+                xmlQuery.Element("RK7Query")
+                    .Elements("RK7Command2")
+                    .First(e => e.Attribute("RefName").Value == refName.ToString())
+                    .Add(new XAttribute("onlyActive", "1"));
+
+
+                //xmlQuery.Element("RK7Query")?
+                //            .Element("RK7Command2")?
+                //            .Add(new XAttribute("onlyActive", "1"));
+            }
             if (items.Length != 0)
             {
                 StringBuilder Prop = new StringBuilder();
                 Prop.AppendJoin(",", items);
-                xmlQuery.Element("RK7Query")?
-                        .Element("RK7Command2")?
+                xmlQuery.Element("RK7Query")
+                        .Elements("RK7Command2")
+                        .First(e => e.Attribute("RefName").Value == refName.ToString())
                         .Add(new XAttribute("PropMask", $"items.({Prop})"));
 
             }

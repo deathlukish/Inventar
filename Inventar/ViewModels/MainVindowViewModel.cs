@@ -31,7 +31,7 @@ namespace Inventar.ViewModels
             OpenConfig = new RelayCommand(OnOpenConfig, CanOpenGonfig);
             BotInit bot = new BotInit(ConfigLoad.GetConfig().ApiToken!.Token!);
             UpdateHandlers.Update += (Message a)=>MessageBox.Show(a.From?.ToString());
-            ReturnerObject returner = new();
+            ReturnerObject<CommandResults> returner = new();
             var a = returner.NewTestXML();
 
         }

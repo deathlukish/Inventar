@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace FKCPObj.SimpleClass
 {
@@ -11,7 +6,7 @@ namespace FKCPObj.SimpleClass
     public class CommandResults
     {
         [XmlElement]
-        public CommandResult CommandResult { get; set; }       
+        public List<CommandResult> CommandResult { get; set; }       
         
     }
     public class CommandResult

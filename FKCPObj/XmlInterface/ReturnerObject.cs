@@ -4,13 +4,13 @@ using System.Xml.Serialization;
 
 namespace FKCPObj.XmlInterface
 {
-    public class ReturnerObject
+    public class ReturnerObject<T> where T : CommandResults
     {
         public List<SimpleOP>? GetAllOp()
         {
             List<SimpleOP>? b =  new();
             XmlQueryCreater xmlQuery = new();
-            xmlQuery.AddCommand(Rk7Cmd.GetRefData, RefNames.RESTAURANTS, "Code", "AltName", "DeviceLicenses", "Childs");
+            xmlQuery.AddCommand(Rk7Cmd.GetRefData, RefNames.RESTAURANTS, false, "Code", "AltName", "DeviceLicenses", "Childs");
             string a = SenderQuery.GetResultXML(xmlQuery);
             XDocument doc = XDocument.Parse(a);
             if (doc.Element("RK7QueryResult")?
@@ -46,7 +46,7 @@ namespace FKCPObj.XmlInterface
         public List<SimpleUK> GetAllUK()
         {
             XmlQueryCreater xmlQuery = new();
-            xmlQuery.AddCommand(Rk7Cmd.GetRefData, RefNames.CASHES);
+            xmlQuery.AddCommand(Rk7Cmd.GetRefData, RefNames.CASHES, false);
             string a = SenderQuery.GetResultXML(xmlQuery);
             XDocument doc = XDocument.Parse(a);
             List<SimpleUK>? b = doc.Element("RK7QueryResult")?
@@ -77,18 +77,19 @@ namespace FKCPObj.XmlInterface
 
             
         }
-        public CommandResults NewTestXML()
+        public T NewTestXML()
         {
-            CommandResults simpleUKs = new CommandResults();
+            //CommandResults simpleUKs = new CommandResults();
             XmlQueryCreater xmlQuery = new();
-            xmlQuery.AddCommand(Rk7Cmd.GetRefData, RefNames.RESTAURANTS, "Code", "AltName", "DeviceLicenses", "Childs","Name");
+            xmlQuery.AddCommand(Rk7Cmd.GetRefData, RefNames.CASHES,true, "Code", "AltName", "DeviceLicenses", "Childs","Name");
+            xmlQuery.AddCommand(Rk7Cmd.GetRefData, RefNames.RESTAURANTS, true, "Code", "AltName", "DeviceLicenses", "Childs", "Name");
             string s = SenderQuery.GetResultXML(xmlQuery);
-            var xml = new XmlSerializer(typeof(CommandResults));
+            var xml = new XmlSerializer(typeof(T));
             using (var sr = new StringReader(s))
             {
-                simpleUKs = (CommandResults)xml.Deserialize(sr);
+                return (T)xml.Deserialize(sr);
             }
-            return simpleUKs;
+            //return simpleUKs;
         }
     }
 }

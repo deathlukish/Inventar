@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Diagnostics;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace FKCPObj.XmlInterface
@@ -20,7 +21,14 @@ namespace FKCPObj.XmlInterface
         {
             XmlQuery = xmlQuery.ToString();           
             Task task = Task.Run(LoadRefAsync);
-            task.Wait();
+            try
+            {
+                task.Wait();
+            }
+            catch(Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
             return resultXML;
         }
                 
