@@ -21,14 +21,8 @@ namespace FKCPObj.XmlInterface
         {
             XmlQuery = xmlQuery.ToString();           
             Task task = Task.Run(LoadRefAsync);
-            try
-            {
-                task.Wait();
-            }
-            catch(Exception e)
-            {
-                Debug.WriteLine(e.Message);
-            }
+            task.Wait();
+           
             return resultXML;
         }
                 
@@ -46,26 +40,25 @@ namespace FKCPObj.XmlInterface
             {
                 return true;
             };
-            using (var client = new HttpClient(httpClientHandler))
+            try
             {
-                using (var multipartFormContent = new MultipartFormDataContent())
+                using (var client = new HttpClient(httpClientHandler))
                 {
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authToken));
-                    var reqestXML = new StringContent(XmlQuery);
-                    multipartFormContent.Add(reqestXML);
-                    var response = await client.PostAsync(url, multipartFormContent);
-                    try
+                    using (var multipartFormContent = new MultipartFormDataContent())
                     {
+                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authToken));
+                        var reqestXML = new StringContent(XmlQuery);
+                        multipartFormContent.Add(reqestXML);
+                        var response = await client.PostAsync(url, multipartFormContent);
                         response.EnsureSuccessStatusCode();
                         resultXML = await response.Content.ReadAsStringAsync();
-                    }
-                    catch (Exception ex)
-                    {
-                        //Where event
-                        //MessageBox.Show($"Уппс {ex.ToString}");
-                    }
 
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Уппс {ex.ToString}");
             }
  
         }
