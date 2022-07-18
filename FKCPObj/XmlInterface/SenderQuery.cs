@@ -17,7 +17,7 @@ namespace FKCPObj.XmlInterface
         /// <returns>
         /// Файл XML ответа из интерфейса
         /// </returns>
-        public static string GetResultXML(XmlQueryCreater xmlQuery)
+        public static string GetResultXML(XmlQueryBuilder xmlQuery)
         {
             XmlQuery = xmlQuery.ToString();           
             Task task = Task.Run(LoadRefAsync);
@@ -58,7 +58,7 @@ namespace FKCPObj.XmlInterface
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Уппс {ex.ToString}");
+                Debug.WriteLine($"Уппс {ex.Message}");
             }
  
         }

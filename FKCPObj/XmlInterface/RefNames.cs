@@ -9,6 +9,7 @@ namespace FKCPObj.XmlInterface
     internal enum RefNames
     {
         RESTAURANTS = 1,
-        CASHES = 2
+        CASHES = 2,
+        EMPLOYEES = 3
     }
 }

@@ -7,10 +7,10 @@ using System.Xml.Linq;
 
 namespace FKCPObj.XmlInterface
 {
-    internal class XmlQueryCreater
+    internal class XmlQueryBuilder
     {
         private XDocument xmlQuery;
-        public XmlQueryCreater()
+        public XmlQueryBuilder()
         {
             xmlQuery = new XDocument(new XElement("RK7Query"));
         }
@@ -30,7 +30,7 @@ namespace FKCPObj.XmlInterface
         /// Параметры фильтрации для сервера
         /// </param>
         /// <returns></returns>
-        public XmlQueryCreater AddCommand(Rk7Cmd cmd, RefNames refName,bool onlyActive, params string[] items)
+        public XmlQueryBuilder AddCommand(Rk7Cmd cmd, RefNames refName,bool onlyActive, params string[] items)
         {
             xmlQuery.Element("RK7Query")?
                 .Add(new XElement("RK7Command2",
@@ -40,15 +40,10 @@ namespace FKCPObj.XmlInterface
             );
             if (onlyActive)
             {
-                xmlQuery.Element("RK7Query")
+                xmlQuery?.Element("RK7Query")?
                     .Elements("RK7Command2")
-                    .First(e => e.Attribute("RefName").Value == refName.ToString())
+                    .First(e => e.Attribute("RefName")?.Value == refName.ToString())
                     .Add(new XAttribute("onlyActive", "1"));
-
-
-                //xmlQuery.Element("RK7Query")?
-                //            .Element("RK7Command2")?
-                //            .Add(new XAttribute("onlyActive", "1"));
             }
             if (items.Length != 0)
             {
