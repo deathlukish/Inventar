@@ -23,6 +23,20 @@ namespace FKCPObj.SimpleClass
         public string? WorkTime { get; set; }
         [XmlElement]
         public RK7Reference RK7Reference { get; set; }
+        [XmlElement]
+        public SourceCommand SourceCommand { get; set; }
+    }
+    public class SourceCommand
+    {
+        [XmlElement]
+        public RK7Command2 RK7Command2 { get; set; }
+    }
+    public class RK7Command2
+    {
+        [XmlAttribute]
+        public string? CMD { get; set; }
+        [XmlAttribute]
+        public string? RefName { get; set; }
     }
     public class RK7Reference
     {

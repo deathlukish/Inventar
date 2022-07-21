@@ -19,13 +19,13 @@ namespace FKCPObj.XmlInterface
         /// </returns>
         public static string GetResultXML(XmlQueryBuilder xmlQuery)
         {
-            XmlQuery = xmlQuery.ToString();           
+            XmlQuery = xmlQuery.ToString();
             Task task = Task.Run(LoadRefAsync);
             task.Wait();
-           
+
             return resultXML;
         }
-                
+
         /// <summary>
         /// Отправка запроса на сервер и получения результата в виде XML
         /// </summary>
@@ -60,8 +60,8 @@ namespace FKCPObj.XmlInterface
             {
                 Debug.WriteLine($"Уппс {ex.Message}");
             }
- 
+
         }
- 
+
     }
 }

@@ -49,9 +49,9 @@ namespace FKCPObj.XmlInterface
             {
                 StringBuilder Prop = new StringBuilder();
                 Prop.AppendJoin(",", items);
-                xmlQuery.Element("RK7Query")
+                xmlQuery?.Element("RK7Query")?
                         .Elements("RK7Command2")
-                        .First(e => e.Attribute("RefName").Value == refName.ToString())
+                        .First(e => e?.Attribute("RefName")?.Value == refName.ToString())
                         .Add(new XAttribute("PropMask", $"items.({Prop})"));
 
             }
