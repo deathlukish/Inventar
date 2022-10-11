@@ -11,6 +11,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Xml.Linq;
@@ -26,14 +27,22 @@ namespace Inventar.ViewModels
         public ICommand OpenConfig { get; }
         private bool CanOpenGonfig(object p) => true;
         private void OnOpenConfig(object p) => new Configurator().Show();
+        private async Task get()
+        {
+            CommandResults commandResult = new();
+            ReturnerObject returner = new();
+            commandResult = await returner.GetObjectFromXmlInterface();
+
+
+        }
         public MainVindowViewModel()
         {
             OpenConfig = new RelayCommand(OnOpenConfig, CanOpenGonfig);
             BotInit bot = new BotInit(ConfigLoad.GetConfig().ApiToken!.Token!);
             UpdateHandlers.Update += (Message a)=>MessageBox.Show(a.From?.ToString());
-            ReturnerObject returner = new();
-            var a = returner.GetObjectFromXmlInterface();
-
+            //ReturnerObject returner = new();
+            //var a = returner.GetObjectFromXmlInterface();
+            get();
         }
 
 

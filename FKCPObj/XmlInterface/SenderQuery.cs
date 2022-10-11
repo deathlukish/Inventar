@@ -17,50 +17,49 @@ namespace FKCPObj.XmlInterface
         /// <returns>
         /// Файл XML ответа из интерфейса
         /// </returns>
-        public static string GetResultXML(XmlQueryBuilder xmlQuery)
+        public static async Task<string> GetResultXML(XmlQueryBuilder xmlQuery)
         {
             XmlQuery = xmlQuery.ToString();
-            Task task = Task.Run(LoadRefAsync);
-            task.Wait();
-
+            resultXML = await Task.Run(LoadRefAsync);
             return resultXML;
-        }
+        
 
         /// <summary>
         /// Отправка запроса на сервер и получения результата в виде XML
         /// </summary>
-        private static async Task LoadRefAsync()
-        {
-            HttpClientHandler httpClientHandler = new HttpClientHandler();
-            string? userName = ConfigLoad.GetConfig()?.XMLInterface?.Login;
-            string? passwd = ConfigLoad.GetConfig()?.XMLInterface?.Password;
-            byte[] authToken = Encoding.ASCII.GetBytes($"{userName}:{passwd}");
-            string? url = ConfigLoad.GetConfig()?.XMLInterface?.ServerURL;
-            httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) =>
+             static async Task<string> LoadRefAsync()
             {
-                return true;
-            };
-            try
-            {
-                using (var client = new HttpClient(httpClientHandler))
+                HttpClientHandler httpClientHandler = new HttpClientHandler();
+                string? userName = ConfigLoad.GetConfig()?.XMLInterface?.Login;
+                string? passwd = ConfigLoad.GetConfig()?.XMLInterface?.Password;
+                byte[] authToken = Encoding.ASCII.GetBytes($"{userName}:{passwd}");
+                string? url = ConfigLoad.GetConfig()?.XMLInterface?.ServerURL;
+                httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) =>
                 {
-                    using (var multipartFormContent = new MultipartFormDataContent())
+                    return true;
+                };
+                try
+                {
+                    using (var client = new HttpClient(httpClientHandler))
                     {
-                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authToken));
-                        var reqestXML = new StringContent(XmlQuery);
-                        multipartFormContent.Add(reqestXML);
-                        var response = await client.PostAsync(url, multipartFormContent);
-                        response.EnsureSuccessStatusCode();
-                        resultXML = await response.Content.ReadAsStringAsync();
+                        using (var multipartFormContent = new MultipartFormDataContent())
+                        {
+                            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authToken));
+                            var reqestXML = new StringContent(XmlQuery);
+                            multipartFormContent.Add(reqestXML);
+                            var response = await client.PostAsync(url, multipartFormContent);
+                            response.EnsureSuccessStatusCode();
+                            resultXML = await response.Content.ReadAsStringAsync();
 
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Уппс {ex.Message}");
+                }
+                return resultXML;
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Уппс {ex.Message}");
-            }
-
         }
 
     }
