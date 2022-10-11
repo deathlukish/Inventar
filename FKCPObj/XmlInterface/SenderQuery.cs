@@ -27,7 +27,7 @@ namespace FKCPObj.XmlInterface
         /// <summary>
         /// Отправка запроса на сервер и получения результата в виде XML
         /// </summary>
-             static async Task<string> LoadRefAsync()
+            static async Task<string> LoadRefAsync()
             {
                 HttpClientHandler httpClientHandler = new HttpClientHandler();
                 string? userName = ConfigLoad.GetConfig()?.XMLInterface?.Login;
