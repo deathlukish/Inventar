@@ -23,17 +23,14 @@ namespace Inventar.ViewModels
 {
     internal class MainVindowViewModel:ViewModel
     {
-
         public ICommand OpenConfig { get; }
         private bool CanOpenGonfig(object p) => true;
         private void OnOpenConfig(object p) => new Configurator().Show();
-        private async Task get()
+        private async void get()
         {
             CommandResults commandResult = new();
             ReturnerObject returner = new();
             commandResult = await returner.GetObjectFromXmlInterface();
-
-
         }
         public MainVindowViewModel()
         {
@@ -44,12 +41,5 @@ namespace Inventar.ViewModels
             //var a = returner.GetObjectFromXmlInterface();
             get();
         }
-
-
-
-
-
-
-
     }
 }
