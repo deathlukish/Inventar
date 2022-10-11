@@ -6,8 +6,8 @@ namespace FKCPObj.XmlInterface
 {
     internal static class SenderQuery
     {
-        private static string resultXML = "";
-        private static string XmlQuery = "";
+        private static string _resultXML = "";
+        private static string _xmlQuery = "";
         /// <summary>
         /// Получить результат команды из XML интерфейсе
         /// </summary>
@@ -19,9 +19,9 @@ namespace FKCPObj.XmlInterface
         /// </returns>
         public static async Task<string> GetResultXML(XmlQueryBuilder xmlQuery)
         {
-            XmlQuery = xmlQuery.ToString();
-            resultXML = await Task.Run(LoadRefAsync);
-            return resultXML;
+            _xmlQuery = xmlQuery.ToString();
+            _resultXML = await Task.Run(LoadRefAsync);
+            return _resultXML;
         
 
         /// <summary>
@@ -45,11 +45,11 @@ namespace FKCPObj.XmlInterface
                         using (var multipartFormContent = new MultipartFormDataContent())
                         {
                             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authToken));
-                            var reqestXML = new StringContent(XmlQuery);
+                            var reqestXML = new StringContent(_xmlQuery);
                             multipartFormContent.Add(reqestXML);
                             var response = await client.PostAsync(url, multipartFormContent);
                             response.EnsureSuccessStatusCode();
-                            resultXML = await response.Content.ReadAsStringAsync();
+                            _resultXML = await response.Content.ReadAsStringAsync();
 
                         }
                     }
@@ -58,7 +58,7 @@ namespace FKCPObj.XmlInterface
                 {
                     Debug.WriteLine($"Уппс {ex.Message}");
                 }
-                return resultXML;
+                return _resultXML;
             }
         }
 
