@@ -28,7 +28,7 @@ namespace Inventar.ViewModels
         private void OnOpenConfig(object p) => new Configurator().Show();
         private async void get()
         {
-            CommandResults commandResult = new();
+            RK7QueryResult commandResult = new();
             ReturnerObject returner = new();
             commandResult = await returner.GetObjectFromXmlInterface();
         }

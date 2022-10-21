@@ -2,12 +2,22 @@
 
 namespace FKCPObj.SimpleClass
 {
+
     [XmlRoot("RK7QueryResult")]
-    public class CommandResults
+    public class RK7QueryResult
     {
+        [XmlAttribute]
+        public string? ServerVersion { get; set; }
+        [XmlAttribute]
+        public string? XmlVersion { get; set; }
+        [XmlAttribute]
+        public string? NetName { get; set; }
+        [XmlAttribute]
+        public string? Status { get; set; }
+        [XmlAttribute]
+        public string? Processed { get; set; }
         [XmlElement]
-        public List<CommandResult> CommandResult { get; set; }       
-        
+        public List<CommandResult> CommandResult { get; set; }
     }
     public class CommandResult
     {
@@ -68,8 +78,6 @@ namespace FKCPObj.SimpleClass
         public DeviceLicenses DeviceLicenses { get; set; }
         [XmlElement]
         public Childs Childs { get; set; }
-
-
     }
     public class DeviceLicenses
     {

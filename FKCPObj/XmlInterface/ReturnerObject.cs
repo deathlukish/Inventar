@@ -6,7 +6,7 @@ namespace FKCPObj.XmlInterface
     public class ReturnerObject
     {
      
-        public async Task<CommandResults> GetObjectFromXmlInterface()
+        public async Task<RK7QueryResult> GetObjectFromXmlInterface()
         {
             
             XmlQueryBuilder xmlQuery = new();
@@ -14,10 +14,10 @@ namespace FKCPObj.XmlInterface
             xmlQuery.AddCommand(Rk7Cmd.GetRefData, RefNames.RESTAURANTS, true, "Code", "AltName", "DeviceLicenses", "Childs", "Name");
             //xmlQuery.AddCommand(Rk7Cmd.GetRefData, RefNames.EMPLOYEES, true);
             string s = await SenderQuery.GetResultXML(xmlQuery);
-            var xml = new XmlSerializer(typeof(CommandResults));
+            var xml = new XmlSerializer(typeof(RK7QueryResult));
             using (var sr = new StringReader(s))
             {
-                return (CommandResults)xml.Deserialize(sr);
+                return (RK7QueryResult)xml.Deserialize(sr);
             }
             
         }

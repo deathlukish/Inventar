@@ -20,7 +20,7 @@ namespace FKCPObj.XmlInterface
         public static async Task<string> GetResultXML(XmlQueryBuilder xmlQuery)
         {
             _xmlQuery = xmlQuery.ToString();
-            _resultXML = await Task.Run(LoadRefAsync);
+            _resultXML = await LoadRefAsync();
             return _resultXML;
         
 
