@@ -106,8 +106,8 @@ namespace FKCPObj.SimpleClass
     public class Child
     {
         [XmlAttribute]
-        public string ChildIdent { get; set; }
+        public string? ChildIdent { get; set; }
         [XmlAttribute]
-        public string IsTerminal { get; set; }
+        public string? IsTerminal { get; set; }
     }
 }
