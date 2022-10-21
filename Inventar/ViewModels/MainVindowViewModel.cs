@@ -36,11 +36,14 @@ namespace Inventar.ViewModels
             {               
                 foreach (var item2 in item.DeviceLicenses.Items.Item)
                 {
-                    //ints.Add(new DateTime(1899,12,30).AddSeconds(Convert.ToInt64(item2.ExpiresAT)/1000));
-                    ints.Add(new Lic() {OP = item.AltName, Date = new DateTime(1899, 12, 30).AddSeconds(Convert.ToInt64(item2.ExpiresAT) / 1000) });
+                    ints.Add(new Lic() 
+                    {
+                        OP = item.AltName, 
+                        Date = new DateTime(1899, 12, 30).AddSeconds(Convert.ToInt64(item2.ExpiresAT) / 1000) 
+                    });
                 }
             }
-            //commandResult.CommandResult[0].RK7Reference.Items.Item[0].DeviceLicenses.Items.Item[0].ExpiresAT;
+         
         }
         public MainVindowViewModel()
         {
