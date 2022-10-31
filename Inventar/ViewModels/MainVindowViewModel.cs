@@ -19,7 +19,7 @@ namespace Inventar.ViewModels
         public string OP { get; set; }
         public DateTime Date{ get; set;}
 
-    }
+       
     internal class MainVindowViewModel : ViewModel
     {
         
@@ -43,7 +43,7 @@ namespace Inventar.ViewModels
                     });
                 }
             }
-         
+            
         }
         public MainVindowViewModel()
         {
