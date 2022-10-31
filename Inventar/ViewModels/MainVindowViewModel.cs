@@ -17,9 +17,9 @@ namespace Inventar.ViewModels
     public class Lic
     {
         public string OP { get; set; }
-        public DateTime Date{ get; set;}
+        public DateTime Date { get; set; }
 
-       
+    }
     internal class MainVindowViewModel : ViewModel
     {
         
@@ -56,3 +56,4 @@ namespace Inventar.ViewModels
         }
     }
 }
+
